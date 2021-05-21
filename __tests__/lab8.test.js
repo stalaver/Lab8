@@ -152,22 +152,41 @@ describe('Basic user flow for SPA ', () => {
     expect(contentComp).toMatch("Mama always said life was like a box of chocolates. You never know what you're gonna get.");
     expect(srcComp).toMatch("https://s.abcnews.com/images/Entertainment/HT_forrest_gump_ml_140219_4x3_992.jpg");
     expect(altComp).toMatch('forrest running');
-  });
+  }, 10000);
 
   // create your own test 17
-  it('Test17', async() => {
+  it('Test17: Verify the url is correct when clicking on the fifth entry', async() => {
+    await page.goBack();
+    const entries = await page.$$('journal-entry');
+    await entries[4].click();
+    await page.waitForTimeout(100);
+    expect(page.url()).toMatch('/#entry5');
     
-  });
+  }, 10000);
   // create your own test 18
-  it('Test18', async() => {
+  it('Test18: Verify the url is correct when clicking on the sixth entry', async() => {
+    await page.goBack();
+    const entries = await page.$$('journal-entry');
+    await entries[5].click();
+    await page.waitForTimeout(100);
+    expect(page.url()).toMatch('/#entry6');
     
-  });
+  }, 10000);
   // create your own test 19
-  it('Test19', async() => {
+  it('Test19: Verify the url is correct when clicking on the seventh entry', async() => {
+    await page.goBack();
+    const entries = await page.$$('journal-entry');
+    await entries[6].click();
+    await page.waitForTimeout(100);
+    expect(page.url()).toMatch('/#entry7');
     
-  });
+  }, 10000);
   // create your own test 20
-  it('Test20', async() => {
-    
-  }); 
+  it('Test20: Verify the url is correct when clicking on the eighth entry', async() => {
+    await page.goBack();
+    const entries = await page.$$('journal-entry');
+    await entries[7].click();
+    await page.waitForTimeout(100);
+    expect(page.url()).toMatch('/#entry8');
+  }, 10000); 
 });

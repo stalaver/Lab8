@@ -14,4 +14,15 @@
    - If we set Headless to true, puppeteer will run tests without a browser UI.
 
 5. What would your beforeAll callback look like if you wanted to start from the settings page before every test case?
-   - You would need to click on the settings icon first. If you try to use goto with #settings, it would open up the home page of the journal pages. 
+   - You would need to click on the settings icon first. If you try to use goto with #settings, it would open up the home page of the journal pages. To do this, you can call router.setState('settings', false); after line 4.
+
+
+## Author(s):
+- Sergio Talavera
+- Avinash Nayak
+
+## Tests Passing:
+
+![Lab8 Tests](CSE110_Lab8test_Passing.png)
+![Lab8 Tests](CSE110_Lab8test_Sum_Router_Passing.png)
+
