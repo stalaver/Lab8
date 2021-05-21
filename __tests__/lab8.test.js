@@ -29,15 +29,29 @@ describe('Basic user flow for SPA ', () => {
 
   it('Test3: Clicking first <journal-entry>, new URL should contain /#entry1', async () => {
     // implement test3: Clicking on the first journal entry should update the URL to contain “/#entry1”
-
+    await page.click('journal-entry');
+    expect(page.url()).toMatch('/#entry1');
   });
 
   it('Test4: On first Entry page - checking page header title', async () => {
     // implement test4: Clicking on the first journal entry should update the header text to “Entry 1” 
-
+    const headerChange = await page.$eval('body > header > h1', elem => elem.textContent);
+    expect(headerChange).toBe('Entry 1');
   });
 
   it('Test5: On first Entry page - checking <entry-page> contents', async () => {
+    const pageComp = await page.$eval('entry-page', (page) => { return page.entry; });
+    
+    const titleComp = pageComp.title;
+    const dateComp = pageComp.date;
+    const contentComp = pageComp.content;
+    const srcComp = pageComp.image.src;
+    const altComp = pageComp.image.alt;
+    expect(titleComp).toMatch('You like jazz?');
+    expect(dateComp).toMatch('4/25/2021');
+    expect(contentComp).toMatch("According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its fat little body off the ground. The bee, of course, flies anyway because bees don't care what humans think is impossible.");
+    expect(srcComp).toMatch("https://i1.wp.com/www.thepopcornmuncher.com/wp-content/uploads/2016/11/bee-movie.jpg?resize=800%2C455");
+    expect(altComp).toMatch('bee with sunglasses');
     /*
      implement test5: Clicking on the first journal entry should contain the following contents: 
         { 
@@ -60,48 +74,78 @@ describe('Basic user flow for SPA ', () => {
 
   it('Test7: Clicking the settings icon, new URL should contain #settings', async () => {
     // implement test7: Clicking on the settings icon should update the URL to contain “/#settings”
-
+    await page.click("img[alt='settings']");
+    expect(page.url()).toMatch('/#settings');
   });
 
   it('Test8: On Settings page - checking page header title', async () => {
     // implement test8: Clicking on the settings icon should update the header to be “Settings”
-
+    const headerChange = await page.$eval('body > header > h1', elem => elem.textContent);
+    expect(headerChange).toBe('Settings');
   });
 
   it('Test9: On Settings page - checking <body> element classes', async () => {
     // implement test9: Clicking on the settings icon should update the class attribute of <body> to ‘settings’
-
+    // await page.click("img[alt='settings']");
+    // settingsName = document.querySelector(body);
+    // expect(settingsName.className).toMatch('settings');
+    const settingsName = await page.evaluate(() => {
+      const elem = document.querySelector('body');
+      return elem.className;
+    });
+    expect(settingsName).toMatch('settings');
   });
 
   it('Test10: Clicking the back button, new URL should be /#entry1', async() => {
     // implement test10: Clicking on the back button should update the URL to contain ‘/#entry1’
-
+    await page.goBack();
+    expect(page.url()).toMatch('/#entry1');
   });
 
   // define and implement test11: Clicking the back button once should bring the user back to the home page
-
+  it('Test11: Clicking the back button once should bring the user back to the home page', async() => {
+    
+  });
 
   // define and implement test12: When the user if on the homepage, the header title should be “Journal Entries”
-
+  it('Test12: When the user if on the homepage, the header title should be “Journal Entries”', async() => {
+    
+  });
 
   // define and implement test13: On the home page the <body> element should not have any class attribute 
-
+  it('Test13: On the home page the <body> element should not have any class attribute', async() => {
+    
+  });
 
   // define and implement test14: Verify the url is correct when clicking on the second entry
-
+  it('Test14: Verify the url is correct when clicking on the second entry', async() => {
+    
+  });
 
   // define and implement test15: Verify the title is current when clicking on the second entry
-
+  it('Test15: Verify the title is current when clicking on the second entry', async() => {
+    
+  });
 
   // define and implement test16: Verify the entry page contents is correct when clicking on the second entry
-
+  it('Test16: Verify the entry page contents is correct when clicking on the second entry', async() => {
+    
+  });
 
   // create your own test 17
-
+  it('Test17', async() => {
+    
+  });
   // create your own test 18
-
+  it('Test18', async() => {
+    
+  });
   // create your own test 19
-
+  it('Test19', async() => {
+    
+  });
   // create your own test 20
-  
+  it('Test20', async() => {
+    
+  }); 
 });
