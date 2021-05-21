@@ -4,28 +4,28 @@ describe('Basic user flow for SPA ', () => {
     await page.waitForTimeout(500);
   });
 
-  // // test 1 is given
-  // it('Test1: Initial Home Page - Check for 10 Journal Entries', async () => {
-  //   const numEntries = await page.$$eval('journal-entry', (entries) => {
-  //     return entries.length;
-  //   });
-  //   expect(numEntries).toBe(10);
-  // });
+  // test 1 is given
+  it('Test1: Initial Home Page - Check for 10 Journal Entries', async () => {
+    const numEntries = await page.$$eval('journal-entry', (entries) => {
+      return entries.length;
+    });
+    expect(numEntries).toBe(10);
+  });
 
-  // // test 2 is given
-  // it('Test2: Make sure <journal-entry> elements are populated', async () => {
-  //   let allArePopulated = true;
-  //   let data, plainValue;
-  //   const entries = await page.$$('journal-entry');
-  //   for (let i = 0; i < entries.length; i++) {
-  //     data = await entries[i].getProperty('entry');
-  //     plainValue = await data.jsonValue();
-  //     if (plainValue.title.length == 0) { allArePopulated = false; }
-  //     if (plainValue.date.length == 0) { allArePopulated = false; }
-  //     if (plainValue.content.length == 0) { allArePopulated = false; }
-  //   }
-  //   expect(allArePopulated).toBe(true);
-  // }, 30000);
+  // test 2 is given
+  it('Test2: Make sure <journal-entry> elements are populated', async () => {
+    let allArePopulated = true;
+    let data, plainValue;
+    const entries = await page.$$('journal-entry');
+    for (let i = 0; i < entries.length; i++) {
+      data = await entries[i].getProperty('entry');
+      plainValue = await data.jsonValue();
+      if (plainValue.title.length == 0) { allArePopulated = false; }
+      if (plainValue.date.length == 0) { allArePopulated = false; }
+      if (plainValue.content.length == 0) { allArePopulated = false; }
+    }
+    expect(allArePopulated).toBe(true);
+  }, 30000);
 
   it('Test3: Clicking first <journal-entry>, new URL should contain /#entry1', async () => {
     // implement test3: Clicking on the first journal entry should update the URL to contain “/#entry1”
@@ -126,20 +126,16 @@ describe('Basic user flow for SPA ', () => {
 
   // define and implement test14: Verify the url is correct when clicking on the second entry
   it('Test14: Verify the url is correct when clicking on the second entry', async() => {
-    // await page.click('journal-entry');
-    // await page.click('journal-entry');
-    // expect(page.url()).toMatch('/#entry2');
-
-    // const numEntries = await page.$$eval('journal-entry', (entries) => {
-    //   return entries[1];
-    // });
-    // expect(page.url()).toMatch(numEntries);
+    const entries = await page.$$('journal-entry');
+    await entries[1].click();
+    await page.waitForTimeout(100);
+    expect(page.url()).toMatch('/#entry2');
   });
 
   // define and implement test15: Verify the title is current when clicking on the second entry
   it('Test15: Verify the title is current when clicking on the second entry', async() => {
-    const headerChange = await page.$eval('h1', elem => elem.textContent);
-    expect(headerChange).toMatch('Entry 2');
+    const headerChange = await page.$eval('body > header > h1', elem => elem.textContent);
+    expect(headerChange).toBe('Entry 2');
   });
 
   // define and implement test16: Verify the entry page contents is correct when clicking on the second entry
